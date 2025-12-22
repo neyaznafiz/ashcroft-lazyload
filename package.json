@@ -1,0 +1,31 @@
+{
+  "name": "@ashcroft/lazyload",
+  "version": "1.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "A package for lazyload image, videos, function call, etc.",
+  "keywords": [
+    "lazyload",
+    "image",
+    "videos",
+    "function call",
+    "optimize",
+    "neyaznafiz"
+  ],
+  "homepage": "https://github.com/neyaznafiz/ashcroft-lazyload#readme",
+  "bugs": {
+    "url": "https://github.com/neyaznafiz/ashcroft-lazyload/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neyaznafiz/ashcroft-lazyload.git"
+  },
+  "license": "ISC",
+  "author": "Neyaz Nafiz",
+  "type": "commonjs",
+  "main": "lazyload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

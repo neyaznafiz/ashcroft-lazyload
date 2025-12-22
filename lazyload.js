@@ -282,4 +282,4 @@ class LazyLoad {
   }
 }
 
-export { LazyLoad };
+module.exports = LazyLoad
