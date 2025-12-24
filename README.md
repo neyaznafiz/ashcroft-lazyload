@@ -105,7 +105,8 @@ lazy.loadImage({
     wrapper: "#image-wrapper"
     srcTarget: ".lazy-img",
     options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it. Only use when you want manual control.
+    // the package internally handle it.
+    // Only use when you want manual control.
         root: null,
         loadBefore: 0,
         loadAfter: 0
@@ -134,7 +135,8 @@ lazy.loadImage({
         "/images/demo-3.jpg"
     ],
     options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it. Only use when you want manual control.
+    // the package internally handle it.
+    // Only use when you want manual control.
         root: null,
         loadBefore: 0,
         loadAfter: 0
@@ -169,9 +171,9 @@ Setting the `video url` into an attribute called `data-url`
 
 ```html
 <div id="video-wrapper">
-    <video class="lazy-video" controls data-url="/videos/demo-1.mp4"></video>
-    <video class="lazy-video" controls data-url="/videos/demo-2.mp4"></video>
-    <video class="lazy-video" controls data-url="/videos/demo-3.mp4"></video>
+    <video class="lazy-video" data-url="/videos/demo-1.mp4"></video>
+    <video class="lazy-video" data-url="/videos/demo-2.mp4"></video>
+    <video class="lazy-video" data-url="/videos/demo-3.mp4"></video>
 </div>
 ```
 
@@ -180,7 +182,8 @@ lazy.loadVideo({
     wrapper: "#video-wrapper"
     srcTarget: ".lazy-video",
     options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it. Only use when you want manual control.
+    // the package internally handle it.
+    // Only use when you want manual control.
         root: null,
         loadBefore: 0,
         loadAfter: 0
@@ -193,9 +196,9 @@ Passing `videos: []`(Array of video urls) parameter into the `loadVideo()` funct
 
 ```html
 <div id="video-wrapper">
-    <video class="lazy-video" controls></video>
-    <video class="lazy-video" controls></video>
-    <video class="lazy-video" controls></video>
+    <video class="lazy-video"></video>
+    <video class="lazy-video"></video>
+    <video class="lazy-video"></video>
 </div>
 ```
 
@@ -209,7 +212,8 @@ lazy.loadVideo({
         "/videos/demo-3.mp4"
     ],
     options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it. Only use when you want manual control.
+    // the package internally handle it.
+    // Only use when you want manual control.
         root: null,
         loadBefore: 0,
         loadAfter: 0
@@ -242,7 +246,8 @@ lazy.executeFn({
     viewportEntry: "#stats",
     exeFn: () => console.log("Visible"),
     options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it. Only use when you want manual control.
+    // the package internally handle it.
+    // Only use when you want manual control.
         root: null,
         loadBefore: 0,
         loadAfter: 0
@@ -252,15 +257,15 @@ lazy.executeFn({
 
 ---
 
-## 💻 Usages
+## 💻 Usage
 
 **NOTE:** Replace the image and video urls with actual urls
 
 
 ```html
-<!-- ###########################################################################
------------------------------------- Styles -----------------------------------#
-############################################################################ -->
+<!-- ###########################################################
+--------------------------- Styles ----------------------------#
+########################################################### -->
 <style>
     * { padding: 0; margin: 0; }
 
@@ -280,11 +285,11 @@ lazy.executeFn({
     }
 </style>
 
-<!-- ###########################################################################
-------------------------------------- HTML ------------------------------------#
-############################################################################ -->
+<!-- ###########################################################
+--------------------------- HTML ------------------------------#
+############################################################ -->
 
-<!-- ---------------------------- Image Elements ------------------------------ -->
+<!-- --------------------- Image Elements ------------------ -->
 <div id="image-wrapper" class="wrapper">
     <img class="lazy-img item" data-url="/images/demo-1.jpg" />
     <img class="lazy-img item" data-url="/images/demo-2.jpg" />
@@ -297,44 +302,44 @@ lazy.executeFn({
     <img class="lazy-img item" />
 </div>
 
-<!-- ---------------------------- Video Elements ----------------------------- -->
+<!-- --------------------- Video Elements -------------------- -->
 <div id="video-wrapper" class="wrapper">
-    <video class="lazy-video item" controls data-url="/videos/demo-1.mp4"></video>
-    <video class="lazy-video item" controls data-url="/videos/demo-2.mp4"></video>
-    <video class="lazy-video item" controls data-url="/videos/demo-3.mp4"></video>
+    <video class="lazy-video item" data-url="/videos/demo-1.mp4"></video>
+    <video class="lazy-video item" data-url="/videos/demo-2.mp4"></video>
+    <video class="lazy-video item" data-url="/videos/demo-3.mp4"></video>
 </div>
 
 <div id="video-wrapper-2" class="wrapper">
-    <video class="lazy-video item" controls></video>
-    <video class="lazy-video item" controls></video>
-    <video class="lazy-video item" controls></video>
+    <video class="lazy-video item"></video>
+    <video class="lazy-video item"></video>
+    <video class="lazy-video item"></video>
 </div>
 
-<!-- ---------------------------- Function Element ---------------------------- -->
+<!-- ------------------- Function Element -------------------- -->
 <div id="stats" class="wrapper"></div>
 
-<!-- ###########################################################################
------------------------------------- Script -----------------------------------#
-############################################################################ -->
+<!-- ###########################################################
+----------------------------- Script ----------------------------#
+########################################################### -->
 <script type="module">
     import Lazyload from "@ashcroft/lazyload";
     const lazy = new Lazyload();
 
-    // ----------------------------- Configuration --------------------------------
-    // Most of the time you don't need this, the package internally handle it.
-    // Only use when you want manual control.
+    // -------------------- Configuration ------------------------
+    // Most of the time you don't need this, the package internally
+    // handle it. Only use when you want manual control.
     const config = {
         root: null,
         loadBefore: 0,
         loadAfter: 0
     }
 
-    // ------------------------------ Load Images ---------------------------------
+    // ---------------------- Load Images -------------------------
     lazy.loadImage({
         wrapper: "#image-wrapper"
         srcTarget: ".lazy-img",
-        options: config // Most of the time you don't need to set this parameter,
-        // the package internally handle it.
+        options: config // Most of the time you don't need to set this
+        // parameter, the package internally handle it.
         // Only use when you want manual control.
     });
 
@@ -346,8 +351,8 @@ lazy.executeFn({
             "/images/demo-2.jpg",
             "/images/demo-3.jpg"
         ],
-        options: config // Most of the time you don't need to set this parameter,
-        // the package internally handle it.
+        options: config // Most of the time you don't need to set this
+        // parameter, the package internally handle it.
         // Only use it when you want manual control.
     });
 
@@ -355,8 +360,8 @@ lazy.executeFn({
     lazy.loadVideo({
         wrapper: "#video-wrapper"
         srcTarget: ".lazy-video",
-        options: config // Most of the time you don't need to set this parameter,
-        // the package internally handle it.
+        options: config // Most of the time you don't need to set this
+        // parameter, the package internally handle it.
         // Only use when you want manual control.
     });
 
@@ -368,14 +373,16 @@ lazy.executeFn({
             "/videos/demo-2.mp4",
             "/videos/demo-3.mp4"
         ],
-        options: config // Most of the time you don't need to set this parameter,
-        // the package internally handle it.
+        options: config // Most of the time you don't need to set this
+        // parameter, the package internally handle it.
         // Only use it when you want manual control.
     });
 
     // --------------------------- Function Execution -----------------------------
     function apiCall() {
-        const resp = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const url = "https://jsonplaceholder.typicode.com/posts"
+
+        const resp = await fetch(url);
         const data = await resp.json();
         console.log(data);
     }
@@ -383,8 +390,8 @@ lazy.executeFn({
     lazy.executeFn({
         viewportEntry: "#stats",
         exeFn: apiCall,
-        options: config // Most of the time you don't need to set this parameter,
-        // the package internally handle it.
+        options: config // Most of the time you don't need to set this
+        // parameter, the package internally handle it.
         // Only use it when you want manual control.
     });
 </script>
