@@ -388,5 +388,6 @@ class Lazyload {
     }
 }
 
+window.Lazyload = Lazyload;
 export { Lazyload };
 export default Lazyload;
