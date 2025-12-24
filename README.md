@@ -27,13 +27,13 @@ This is a modern, dependency-free vanilla JavaScript utility built on top of the
 ## 📦 Installation
 
 ```bash
-npm install @ashcroft/lazyload
+npm install @ashcroft/lazyload@latest
 ```
 
 or
 
 ```bash
-yarn add @ashcroft/lazyload
+yarn add @ashcroft/lazyload@latest
 ```
 
 ---
