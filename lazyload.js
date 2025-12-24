@@ -164,6 +164,8 @@ class Lazyload {
                         attr
                             ? srcElem.setAttribute(attr, path)
                             : srcElem.src = path
+
+                        srcElem.removeAttribute("data-url")
                     } else {
                         throw new Error('Failed to construct "LazyLoad": The url attribute name must have to be `data-url`!');
                     }
@@ -278,6 +280,8 @@ class Lazyload {
                         attr
                             ? srcElem.setAttribute(attr, path)
                             : srcElem.src = path
+
+                        srcElem.removeAttribute("data-url")
                     } else {
                         throw new Error('Failed to construct "LazyLoad": The url attribute name must have to be `data-url`!');
                     }
