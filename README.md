@@ -290,7 +290,7 @@ lazy.executeFn({
 ##################################################################### -->
 
 <!-- ------------------------ Image Elements ------------------------ -->
-<div id="image-wrapper" class="wrapper">
+<div id="image-wrapper-1" class="wrapper">
     <img class="lazy-img item" data-url="/images/demo-1.jpg" />
     <img class="lazy-img item" data-url="/images/demo-2.jpg" />
 </div>
@@ -301,7 +301,7 @@ lazy.executeFn({
 </div>
 
 <!-- ------------------------ Video Elements ------------------------ -->
-<div id="video-wrapper" class="wrapper">
+<div id="video-wrapper-1" class="wrapper">
     <iframe
         class="lazy-video item" data-url="/videos/demo-1.mp4"
         frameborder="0" width="200" height="200"
@@ -344,7 +344,7 @@ lazy.executeFn({
 
     // --------------------------- Load Images --------------------------
     lazy.loadImage({
-        wrapper: "#image-wrapper"
+        wrapper: "#image-wrapper-1"
         srcTarget: ".lazy-img",
         options: config // Most of the time you don't need to set this
         // parameter, the package internally handle it.
@@ -362,7 +362,7 @@ lazy.executeFn({
 
     // --------------------------- Load Videos --------------------------
     lazy.loadVideo({
-        wrapper: "#video-wrapper"
+        wrapper: "#video-wrapper-1"
         srcTarget: ".lazy-video",
         options: config // Most of the time you don't need to set this
         // parameter, the package internally handle it.
@@ -379,7 +379,7 @@ lazy.executeFn({
     });
 
     // ------------------------ Function Execution ----------------------
-    function apiCall() {
+    async function apiCall() {
         const url = "https://jsonplaceholder.typicode.com/posts"
 
         const resp = await fetch(url);
