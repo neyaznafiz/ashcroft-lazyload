@@ -26,24 +26,30 @@ This is a modern, dependency-free vanilla JavaScript utility built on top of the
 
 ## 📦 Installation
 
+### **Package Manager**
+
 ```bash
 npm install @ashcroft/lazyload@latest
 ```
-
 or
-
 ```bash
 yarn add @ashcroft/lazyload@latest
 ```
 
----
-
-## Getting Started
+Usage
 
 ```js
 import Lazyload from "@ashcroft/lazyload";
 // or
 const Lazyload = require("@ashcroft/lazyload");
+
+const lazy = new Lazyload();
+```
+
+### **CDN**
+
+```js
+import { Lazyload } from "https://unpkg.com/@ashcroft/lazyload/lazyload.js";
 
 const lazy = new Lazyload();
 ```
