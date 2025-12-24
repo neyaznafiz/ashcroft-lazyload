@@ -382,4 +382,5 @@ class Lazyload {
     }
 }
 
-module.exports = Lazyload
+export { Lazyload };
+export default Lazyload;
