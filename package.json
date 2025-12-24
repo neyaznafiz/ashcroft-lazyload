@@ -7,6 +7,7 @@
   "description": "A lightweight JavaScript utility for lazyload images, videos, function call, and etc.",
   "keywords": [
     "lazyload",
+    "IntersectionObserver",
     "image",
     "videos",
     "function call",

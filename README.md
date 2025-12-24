@@ -82,7 +82,7 @@ It will load images when item will enter into the viewport. the method accept 5 
 **result** `<img data-image="/images/demo-1.jpg" />`
 
 - **images:** (Optional) - The `images` is an array of string(image url). </br>
-**e.g.,** `images: [ "/images/demo-1.jpg", "/images/demo-2.jpg", "/images/demo-3.jpg"]`
+**e.g.,** `images: [ "/images/demo-1.jpg", "/images/demo-2.jpg"]`
 
 - **options:** (Optional) - The `options` is the configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
@@ -96,7 +96,6 @@ Setting the `image url` into an attribute called `data-url`
 <div id="image-wrapper">
     <img class="lazy-img" data-url="/images/demo-1.jpg" />
     <img class="lazy-img" data-url="/images/demo-2.jpg" />
-    <img class="lazy-img" data-url="/images/demo-3.jpg" />
 </div>
 ```
 
@@ -121,7 +120,6 @@ Passing `images: []`(Array of image urls) parameter into the `loadImage()` funct
 <div id="image-wrapper">
     <img class="lazy-img" />
     <img class="lazy-img" />
-    <img class="lazy-img" />
 </div>
 ```
 
@@ -129,11 +127,7 @@ Passing `images: []`(Array of image urls) parameter into the `loadImage()` funct
 lazy.loadImage({
     wrapper: "#image-wrapper"
     srcTarget: ".lazy-img",
-    images: [
-        "/images/demo-1.jpg",
-        "/images/demo-2.jpg",
-        "/images/demo-3.jpg"
-    ],
+    images: ["/images/demo-1.jpg", "/images/demo-2.jpg"],
     options: { // Most of the time you don't need to set this parameter,
     // the package internally handle it.
     // Only use when you want manual control.
@@ -159,7 +153,7 @@ It will load videos when item will enter into the viewport. the method accept 5 
 **result** `<img data-video="/videos/demo-1.mp4" />`
 
 - **videos:** (Optional) - The `videos` is an array of string(video url). </br>
-**e.g.,** `videos: ["/videos/demo-1.mp4", "/videos/demo-2.mp4", "/videos/demo-3.mp4"]`
+**e.g.,** `videos: ["/videos/demo-1.mp4", "/videos/demo-2.mp4"]`
 
 - **options:** (Optional) - The `options` is the configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
@@ -171,9 +165,14 @@ Setting the `video url` into an attribute called `data-url`
 
 ```html
 <div id="video-wrapper">
-    <video class="lazy-video" data-url="/videos/demo-1.mp4"></video>
-    <video class="lazy-video" data-url="/videos/demo-2.mp4"></video>
-    <video class="lazy-video" data-url="/videos/demo-3.mp4"></video>
+    <iframe
+        class="lazy-video item" data-url="/videos/demo-1.mp4"
+        frameborder="0" width="200" height="200"
+    ></iframe>
+    <iframe
+        class="lazy-video item" data-url="/videos/demo-2.mp4"
+        frameborder="0" width="200" height="200"
+    ></iframe>
 </div>
 ```
 
@@ -196,9 +195,14 @@ Passing `videos: []`(Array of video urls) parameter into the `loadVideo()` funct
 
 ```html
 <div id="video-wrapper">
-    <video class="lazy-video"></video>
-    <video class="lazy-video"></video>
-    <video class="lazy-video"></video>
+    <iframe
+        class="lazy-video item"
+        frameborder="0" width="200" height="200"
+    ></iframe>
+    <iframe
+        class="lazy-video item"
+        frameborder="0" width="200" height="200"
+    ></iframe>
 </div>
 ```
 
@@ -206,11 +210,7 @@ Passing `videos: []`(Array of video urls) parameter into the `loadVideo()` funct
 lazy.loadVideo({
     wrapper: "#image-wrapper"
     srcTarget: ".lazy-video",
-    videos: [
-        "/videos/demo-1.mp4",
-        "/videos/demo-2.mp4",
-        "/videos/demo-3.mp4"
-    ],
+    videos: ["/videos/demo-1.mp4", "/videos/demo-2.mp4"],
     options: { // Most of the time you don't need to set this parameter,
     // the package internally handle it.
     // Only use when you want manual control.
@@ -293,26 +293,34 @@ lazy.executeFn({
 <div id="image-wrapper" class="wrapper">
     <img class="lazy-img item" data-url="/images/demo-1.jpg" />
     <img class="lazy-img item" data-url="/images/demo-2.jpg" />
-    <img class="lazy-img item" data-url="/images/demo-3.jpg" />
 </div>
 
 <div id="image-wrapper-2" class="wrapper">
-    <img class="lazy-img item" />
     <img class="lazy-img item" />
     <img class="lazy-img item" />
 </div>
 
 <!-- ------------------------ Video Elements ------------------------ -->
 <div id="video-wrapper" class="wrapper">
-    <video class="lazy-video item" data-url="/videos/demo-1.mp4"></video>
-    <video class="lazy-video item" data-url="/videos/demo-2.mp4"></video>
-    <video class="lazy-video item" data-url="/videos/demo-3.mp4"></video>
+    <iframe
+        class="lazy-video item" data-url="/videos/demo-1.mp4"
+        frameborder="0" width="200" height="200"
+    ></iframe>
+    <iframe
+        class="lazy-video item" data-url="/videos/demo-2.mp4"
+        frameborder="0" width="200" height="200"
+    ></iframe>
 </div>
 
 <div id="video-wrapper-2" class="wrapper">
-    <video class="lazy-video item"></video>
-    <video class="lazy-video item"></video>
-    <video class="lazy-video item"></video>
+    <iframe
+        class="lazy-video item"
+        frameborder="0" width="200" height="200"
+    ></iframe>
+    <iframe
+        class="lazy-video item"
+        frameborder="0" width="200" height="200"
+    ></iframe>
 </div>
 
 <!-- ----------------------- Function Elements ---------------------- -->
@@ -346,11 +354,7 @@ lazy.executeFn({
     lazy.loadImage({
         wrapper: "#image-wrapper-2"
         srcTarget: ".lazy-img",
-        images: [
-            "/images/demo-1.jpg",
-            "/images/demo-2.jpg",
-            "/images/demo-3.jpg"
-        ],
+        images: ["/images/demo-1.jpg", "/images/demo-2.jpg"],
         options: config // Most of the time you don't need to set this
         // parameter, the package internally handle it.
         // Only use it when you want manual control.
@@ -368,11 +372,7 @@ lazy.executeFn({
     lazy.loadVideo({
         wrapper: "#video-wrapper-2"
         srcTarget: ".lazy-video",
-        videos: [
-            "/videos/demo-1.mp4",
-            "/videos/demo-2.mp4",
-            "/videos/demo-3.mp4"
-        ],
+        videos: ["/videos/demo-1.mp4", "/videos/demo-2.mp4"],
         options: config // Most of the time you don't need to set this
         // parameter, the package internally handle it.
         // Only use it when you want manual control.
