@@ -63,17 +63,7 @@ class Lazyload {
     // #########################################################################
     // # Load Images And Videos
     // #########################################################################
-    media({
-        wrapper = null,
-        srcTarget = null,
-        attr = null,
-        lazyUrls = [],
-        options = {
-            root: null,
-            loadBefore: 0,
-            loadAfter: 0
-        }
-    } = {}) {
+    media({wrapper = null, srcTarget = null, attr = null, lazyUrls = [], options = {root: null, loadBefore: 0, loadAfter: 0}} = {}) {
         if (wrapper !== null) {
             if (
                 typeof wrapper !== "string" ||
@@ -136,7 +126,7 @@ class Lazyload {
 
 
     // #########################################################################
-    // # Render Images
+    // # Render Images And Videos
     // #########################################################################
     #renderMedia(attr) {
         return (entries, observer) => {
@@ -164,15 +154,7 @@ class Lazyload {
     // #########################################################################
     // # Execute Function
     // #########################################################################
-    execute({
-        viewportEntry = null,
-        exeFn = null,
-        options = {
-            root: null,
-            loadBefore: 0,
-            loadAfter: 0
-        }
-    } = {}) {
+    execute({viewportEntry = null, exeFn = null, options = {root: null, loadBefore: 0, loadAfter: 0}} = {}) {
         if (
             typeof viewportEntry !== "string" ||
             validCSSSelector(viewportEntry) === false
@@ -200,18 +182,9 @@ class Lazyload {
         this.#observer.observe(element);
     }
 
-    /**
-     * Returns a callback function to be used with IntersectionObserver
-     * which executes the provided function when the observed element
-     * is in view, and then stops observing it.
-     * 
-     * @param {function} exeFn - The function to execute when the element
-     *   containing the selector comes into view. The function must be a
-     *   function.
-     * @returns {function} - A callback function for IntersectionObserver
-     *   that handles intersection changes and executes the provided
-     *   function when the element is in view.
-     */
+    // #########################################################################
+    // # Handle Function Execution
+    // #########################################################################
     #handleFunctionExecution(exeFn) {
         return (entries, observer) => {
             entries.forEach(entry => {
