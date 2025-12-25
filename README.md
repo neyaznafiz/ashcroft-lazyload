@@ -39,7 +39,7 @@ import { Lazyload } from "@bitlaab/lazyload";
 
 Or import directly using **CDN**
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.3/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.4/module.js";
 ```
 
 ---
@@ -50,24 +50,6 @@ import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.3/m
 |-----------|------------------|
 | media()   | Load images and videos when element will enter into the viewport. |
 | execute() | Execute function when element will enter into the viewport. |
-
-## Global Options
-**Most of the time you don't need this, the package internally handle it. Only use when you want manual control.**
-
-```js
-options: {
-    root: null,
-    loadBefore: 0,
-    loadAfter: 0
-}
-```
-
-| Option | Type | Description |
-|------|------|------------|
-| root | string \| null | Viewport container selector |
-| loadBefore | number | Margin before entering viewport |
-| loadAfter | number | Visibility ratio (0–1) |
-
 
 ---
 
@@ -108,13 +90,6 @@ const lazyload = new Lazyload();
 lazyload.media({
     wrapper: "#item-wrapper",
     srcTarget: ".lazy-item",
-    options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it.
-    // Only use when you want manual control.
-        root: null,
-        loadBefore: 0,
-        loadAfter: 0
-    }
 });
 ```
 
@@ -135,13 +110,6 @@ lazyload.media({
     wrapper: "#item-wrapper",
     srcTarget: ".lazy-item",
     lazyUrls: ["/image.jpg", "/video.mp4"],
-    options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it.
-    // Only use when you want manual control.
-        root: null,
-        loadBefore: 0,
-        loadAfter: 0
-    }
 });
 ```
 
@@ -171,12 +139,51 @@ const lazyload = new Lazyload();
 lazyload.execute({
     viewportEntry: "#stats",
     exeFn: () => console.log("Visible"),
-    options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it.
-    // Only use when you want manual control.
-        root: null,
-        loadBefore: 0,
+});
+```
+
+---
+
+## Global Options
+**Most of the time you don't need to use it, the package internally handle those options.**  
+**Only use, when you want manual control.**
+
+```js
+options: {
+    root: null,
+    loadBefore: 0,
+    loadAfter: 0
+}
+```
+
+| Option | Type | Description |
+|------|------|------------|
+| root | string \| null | Viewport container selector |
+| loadBefore | number | Margin before entering viewport |
+| loadAfter | number | Visibility ratio (0–1) |
+
+#### Example
+
+```js
+lazyload.media({
+    wrapper: "...",
+    srcTarget: "...",
+    options: {
+        root: "...",
+        loadBefore: 100,
         loadAfter: 0
+    }
+});
+
+// or
+
+lazyload.execute({
+    viewportEntry: "...",
+    exeFn: () => {},
+    options: {
+        root: "...",
+        loadBefore: 0,
+        loadAfter: 0.8
     }
 });
 ```
