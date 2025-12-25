@@ -1,3 +1,5 @@
+import {validCSSSelector} from "./utils.js"
+
 class Lazyload {
     #observer = null;
     #options = null;
@@ -27,7 +29,7 @@ class Lazyload {
     #config({ root = null, loadBefore = 0, loadAfter = 0 } = {}) {
         let isValidDOM = true;
 
-        if (root !== null) isValidDOM = this.#checkValidCSSSelector(root);
+        if (root !== null) isValidDOM = validCSSSelector(root);
 
         if (isValidDOM === false) {
             throw new Error('Failed to construct "LazyLoad": "root" must have to be a valid CSS selector!');
@@ -59,13 +61,13 @@ class Lazyload {
     }
 
     // #########################################################################
-    // # Load Images
+    // # Load Images And Videos
     // #########################################################################
-    image({
+    media({
         wrapper = null,
         srcTarget = null,
         attr = null,
-        images = [],
+        lazyUrls = [],
         options = {
             root: null,
             loadBefore: 0,
@@ -75,7 +77,7 @@ class Lazyload {
         if (wrapper !== null) {
             if (
                 typeof wrapper !== "string" ||
-                this.#checkValidCSSSelector(wrapper) === false
+                validCSSSelector(wrapper) === false
             ) {
                 throw new Error('Failed to construct "LazyLoad": "wrapper" must have to be a valid CSS selector or null!');
             }
@@ -84,7 +86,7 @@ class Lazyload {
         if (srcTarget !== null) {
             if (
                 typeof srcTarget !== "string" ||
-                this.#checkValidCSSSelector(srcTarget) === false
+                validCSSSelector(srcTarget) === false
             ) {
                 throw new Error('Failed to construct "LazyLoad": "srcTarget" is must have to be a valid CSS selector or null!');
             }
@@ -105,7 +107,7 @@ class Lazyload {
         }
 
         this.#observer = new IntersectionObserver(
-            this.#renderImage(attr), this.#options
+            this.#renderMedia(attr), this.#options
         );
 
         let imgElements = null
@@ -118,13 +120,13 @@ class Lazyload {
             imgElements = document.querySelectorAll(srcTarget);
         }
 
-        if (Array.isArray(images) === true) {
-            if (images.length) {
-                for (let i = 0; i < images.length; i++) {
-                    if (typeof images[i] !== 'string') {
+        if (Array.isArray(lazyUrls) === true) {
+            if (lazyUrls.length) {
+                for (let i = 0; i < lazyUrls.length; i++) {
+                    if (typeof lazyUrls[i] !== 'string') {
                         throw new Error('Failed to construct "LazyLoad": Image path must have to be a string!');
                     }
-                    else imgElements[i].dataset.lazyUrl = images[i];
+                    else imgElements[i].dataset.lazyUrl = lazyUrls[i];
                 }
             }
         }
@@ -136,107 +138,7 @@ class Lazyload {
     // #########################################################################
     // # Render Images
     // #########################################################################
-    #renderImage(attr) {
-        return (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const srcElem = entry.target;
-                    const path = srcElem.dataset.lazyUrl || null;
-
-                    if (path) {
-                        attr
-                            ? srcElem.setAttribute(attr, path)
-                            : srcElem.src = path
-
-                        srcElem.removeAttribute("data-lazy-url")
-                    } else {
-                        throw new Error('Failed to construct "LazyLoad": The url attribute name must have to be `data-lazy-url`!');
-                    }
-
-                    observer.unobserve(srcElem);
-                }
-            });
-        }
-    }
-
-    // #########################################################################
-    // # Load Videos
-    // #########################################################################
-    video({
-        wrapper = null,
-        srcTarget = null,
-        attr = null,
-        videos = [],
-        options = {
-            root: null,
-            loadBefore: 0,
-            loadAfter: 0
-        }
-    } = {}) {
-        if (wrapper !== null) {
-            if (
-                typeof wrapper !== "string" ||
-                this.#checkValidCSSSelector(wrapper) === false
-            ) {
-                throw new Error('Failed to construct "LazyLoad": "wrapper" must have to be a valid CSS selector or null!');
-            }
-        }
-
-        if (srcTarget !== null) {
-            if (
-                typeof srcTarget !== "string" ||
-                this.#checkValidCSSSelector(srcTarget) === false
-            ) {
-                throw new Error('Failed to construct "LazyLoad": "srcTarget" is required and must have to be a valid CSS selector or null!');
-            }
-        }
-
-        if (attr !== null) {
-            if (attr === undefined || typeof attr !== 'string') {
-                throw new Error('Failed to construct "LazyLoad": "attr" is must have to be a string or null!');
-            }
-        }
-
-        if (options.root !== null || options.loadBefore !== 0 || options.loadAfter !== 0) {
-            this.#config({
-                root: options.root,
-                loadBefore: options.loadBefore,
-                loadAfter: options.loadAfter
-            });
-        }
-
-        this.#observer = new IntersectionObserver(
-            this.#renderVideo(attr), this.#options
-        );
-
-        let vdoElements = null
-
-        if (wrapper) {
-            vdoElements = document
-                .querySelector(wrapper)
-                .querySelectorAll(srcTarget);
-        } else {
-            vdoElements = document.querySelectorAll(srcTarget);
-        }
-
-        if (Array.isArray(videos) === true) {
-            if (videos.length) {
-                for (let i = 0; i < videos.length; i++) {
-                    if (typeof videos[i] !== 'string') {
-                        throw new Error('Failed to construct "LazyLoad": Video path must have to be a string!');
-                    }
-                    else vdoElements[i].dataset.lazyUrl = videos[i];
-                }
-            }
-        }
-
-        vdoElements.forEach(srcElem => { this.#observer.observe(srcElem); });
-    }
-
-    // #########################################################################
-    // # Render Videos
-    // #########################################################################
-    #renderVideo(attr) {
+    #renderMedia(attr) {
         return (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -273,7 +175,7 @@ class Lazyload {
     } = {}) {
         if (
             typeof viewportEntry !== "string" ||
-            this.#checkValidCSSSelector(viewportEntry) === false
+            validCSSSelector(viewportEntry) === false
         ) {
             throw new Error('Failed to construct "LazyLoad": "viewportEntry" is required and must be a valid CSS selector!');
         }
@@ -321,31 +223,6 @@ class Lazyload {
             });
         }
     }
-
-    /**
-     * Checks if the provided DOM element is valid or not.
-     * @param {Element} element - The element to check.
-     * @returns {boolean} - True if the element is valid, false if not.
-     */
-    #checkValidDOMElement(element) {
-        if (element && element instanceof Element && element.nodeType === 1) {
-            return true;
-        }
-        else return false;
-    }
-
-    /**
-     * Checks if the provided CSS selector is valid.
-     * @param {string} selector - The CSS selector to check.
-     * @returns {boolean} - True if the selector is valid, false if not.
-     */
-    #checkValidCSSSelector(selector) {
-        const checkSelector = document.querySelector(selector) || null;
-
-        if (checkSelector) return true;
-        else return false;
-    }
 }
 
 export { Lazyload };
-export default Lazyload;

@@ -34,18 +34,22 @@ Or
 yarn add @ashcroft/lazyload@latest
 ```
 ```js
-import Lazyload from "@ashcroft/lazyload";
-// or
-const Lazyload = require("@ashcroft/lazyload");
+import { Lazyload } from "@ashcroft/lazyload";
 ```
 
 Or import directly using **CDN**
 ```js
-import { Lazyload } from "https://unpkg.com/@ashcroft/lazyload/lazyload.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@ashcroft/lazyload@1.1.0/module.js";
 ```
 
-
 ---
+
+## Global Methods
+
+| Method    | Description |
+|-----------|------------------|
+| media()   | Load images and videos when element will enter into the viewport. |
+| execute() | Execute function when element will enter into the viewport. |
 
 ## Global Options
 **Most of the time you don't need this, the package internally handle it. Only use when you want manual control.**
@@ -65,52 +69,44 @@ options: {
 | loadAfter | number | Visibility ratio (0–1) |
 
 
-## Global Methods
-
-| Method    | Description |
-|-----------|------------------|
-| image()   | Load images when element will enter into the viewport. |
-| video()   | Load videos when element will enter into the viewport. |
-| execute() | Execute function when element will enter into the viewport. |
-
 ---
 
-## 🖼️ image()
-It will load images when item will enter into the viewport. the method accept 5 parameters:
+## 🖼️ 🎥 media()
+It will load **images** and **videos** when item will enter into the viewport. the method accept 5 parameters of object:
 - **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `CSS Selector`. </br>
 **e.g.,** `wrapper: "#image-wrapper"` </br> **Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can handle it on your needs.
 
 - **srcTarget:** (Required) - The selector of the elements where the image `src` will be set. The value of it is `CSS Selector`. </br>
 **e.g.,** `srcTarget: ".lazy-img"`
 
-- **attr:** (Optional) - An attribute where image url will be set. If you use this parameter, the image url will be set into this attribute of the `srcTarget` element, otherwise it will set `src` attribute with the image url into the `srcTarget` element by default. </br>
-**e.g.,** `attr: "data-image"` </br>
-**result** `<img data-image="/demo-1.jpg" />`
+- **lazyUrls:** (Optional) - An array of string(image or video url). </br>
+**e.g.,** `lazyUrls: [ "/demo-1.jpg", "/demo-1.mp4"]`
 
-- **images:** (Optional) - An array of string(image url). </br>
-**e.g.,** `images: [ "/demo-1.jpg", "/demo-2.jpg"]`
+- **attr:** (Optional) - An attribute where image url will be set. If you use this parameter, the image url will be set into this attribute of the `srcTarget` element, otherwise it will set `src` attribute with the image url into the `srcTarget` element by default. </br>
+**e.g.,** `attr: "data-xyz"` </br>
+**result** `<img data-xyz="/demo-1.jpg" />`
 
 - **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
 
-### You can load image in two ways:
+### YOU CAN LOAD MEDIA IN TWO WAYS:
 
-#### First Example
+### First Example
 Setting the `image url` into an attribute called `data-lazy-url`
 
 ```html
-<div id="image-wrapper">
-    <img class="lazy-img" data-lazy-url="/demo-1.jpg" />
-    <img class="lazy-img" data-lazy-url="/demo-2.jpg" />
+<div id="item-wrapper">
+    <img class="lazy-item" data-lazy-url="/demo-1.jpg"/>
+    <video class="lazy-item" data-lazy-url="/demo-1.mp4"></video>
 </div>
 ```
 
 ```js
 const lazyload = new Lazyload();
 
-lazyload.image({
-    wrapper: "#image-wrapper",
-    srcTarget: ".lazy-img",
+lazyload.media({
+    wrapper: "#item-wrapper",
+    srcTarget: ".lazy-item",
     options: { // Most of the time you don't need to set this parameter,
     // the package internally handle it.
     // Only use when you want manual control.
@@ -121,98 +117,23 @@ lazyload.image({
 });
 ```
 
-#### Second Example
-Passing `images: []`(Array of image urls) parameter into the `lazyload.image()` function.
+### Second Example
+Passing `lazyUrls: []`(Array of images or videos urls) parameter of the `lazyload.media()` function.
 
 ```html
-<div id="image-wrapper">
-    <img class="lazy-img" />
-    <img class="lazy-img" />
+<div id="item-wrapper">
+    <img class="lazy-item"/>
+    <video class="lazy-item"></video>
 </div>
 ```
 
 ```js
 const lazyload = new Lazyload();
 
-lazyload.image({
-    wrapper: "#image-wrapper",
-    srcTarget: ".lazy-img",
-    images: ["/demo-1.jpg", "/demo-2.jpg"],
-    options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it.
-    // Only use when you want manual control.
-        root: null,
-        loadBefore: 0,
-        loadAfter: 0
-    }
-});
-```
-
----
-
-## 🎥 video()
-It will load videos when item will enter into the viewport. the method accept 5 parameters:
-- **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `CSS Selector`. </br>
-**e.g.,** `wrapper: "#image-wrapper"` </br> **Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can handle it on your needs.
-
-- **srcTarget:** (Required) - The selector of the elements where the video `src` will be set. The value of it is `CSS Selector`. </br>
-**e.g.,** `srcTarget: ".lazy-img"`
-
-- **attr:** (Optional) - The attribute where video url will be set. If you use this parameter, the video url will be set into this attribute of the `srcTarget` element, otherwise it will set `src` attribute with the video url into the `srcTarget` element by default. </br>
-**e.g.,** `attr: "data-video"` </br>
-**result** `<img data-video="/demo-1.mp4" />`
-
-- **videos:** (Optional) - An array of string(video url). </br>
-**e.g.,** `videos: ["/demo-1.mp4", "/demo-2.mp4"]`
-
-- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
-**e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
-
-### You can load videos in two ways:
-
-#### First Example
-Setting the `video url` into an attribute called `data-lazy-url`
-
-```html
-<div id="video-wrapper">
-    <video class="lazy-video item" data-lazy-url="/demo-1.mp4"></video>
-    <video class="lazy-video item" data-lazy-url="/demo-2.mp4"></video>
-</div>
-```
-
-```js
-const lazyload = new Lazyload();
-
-lazyload.video({
-    wrapper: "#video-wrapper",
-    srcTarget: ".lazy-video",
-    options: { // Most of the time you don't need to set this parameter,
-    // the package internally handle it.
-    // Only use when you want manual control.
-        root: null,
-        loadBefore: 0,
-        loadAfter: 0
-    }
-});
-```
-
-#### Second Example
-Passing `videos: []`(Array of video urls) parameter into the `lazyload.video()` function.
-
-```html
-<div id="video-wrapper">
-    <video class="lazy-video item"></video>
-    <video class="lazy-video item"></video>
-</div>
-```
-
-```js
-const lazyload = new Lazyload();
-
-lazyload.video({
-    wrapper: "#image-wrapper",
-    srcTarget: ".lazy-video",
-    videos: ["/demo-1.mp4", "/demo-2.mp4"],
+lazyload.media({
+    wrapper: "#item-wrapper",
+    srcTarget: ".lazy-item",
+    lazyUrls: ["/demo-1.jpg", "/demo-1.mp4"],
     options: { // Most of the time you don't need to set this parameter,
     // the package internally handle it.
     // Only use when you want manual control.
