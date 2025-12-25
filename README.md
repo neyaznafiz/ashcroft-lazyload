@@ -39,7 +39,7 @@ import { Lazyload } from "@ashcroft/lazyload";
 
 Or import directly using **CDN**
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@ashcroft/lazyload@1.1.0/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@ashcroft/lazyload@1.1.1/module.js";
 ```
 
 ---
@@ -73,20 +73,21 @@ options: {
 
 ## 🖼️ 🎥 media()
 It will load **images** and **videos** when item will enter into the viewport. the method accept 5 parameters of object:
-- **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `CSS Selector`. </br>
-**e.g.,** `wrapper: "#image-wrapper"` </br> **Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can handle it on your needs.
+- **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `CSS Selector`.  
+**e.g.,** `wrapper: "#image-wrapper"`  
+**Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can handle it on your needs.
 
-- **srcTarget:** (Required) - The selector of the elements where the image `src` will be set. The value of it is `CSS Selector`. </br>
+- **srcTarget:** (Required) - The selector of the elements where the image `src` will be set. The value of it is `CSS Selector`.  
 **e.g.,** `srcTarget: ".lazy-img"`
 
-- **lazyUrls:** (Optional) - An array of string(image or video url). </br>
+- **lazyUrls:** (Optional) - An array of string(image or video url).  
 **e.g.,** `lazyUrls: [ "/demo-1.jpg", "/demo-1.mp4"]`
 
-- **attr:** (Optional) - An attribute where image url will be set. If you use this parameter, the image url will be set into this attribute of the `srcTarget` element, otherwise it will set `src` attribute with the image url into the `srcTarget` element by default. </br>
-**e.g.,** `attr: "data-xyz"` </br>
+- **attr:** (Optional) - An attribute where image url will be set. If you use this parameter, the image url will be set into this attribute of the `srcTarget` element, otherwise it will set `src` attribute with the image url into the `srcTarget` element by default.  
+**e.g.,** `attr: "data-xyz"`. 
 **result** `<img data-xyz="/demo-1.jpg" />`
 
-- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
+- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional.  
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
 
 ### YOU CAN LOAD MEDIA IN TWO WAYS:
@@ -149,13 +150,13 @@ lazyload.media({
 ## ⚙️ execute()
 It will execute function when `viewportEntry` element will enter into the viewport. the method accept 3 parameters:
 
-- **viewportEntry:** (Required) - The `viewportEntry` is the element where will be the function call, when the element enter into the viewport the function will be called. The value of it is `CSS Selector`. </br>
+- **viewportEntry:** (Required) - The `viewportEntry` is the element where will be the function call, when the element enter into the viewport the function will be called. The value of it is `CSS Selector`.  
 **e.g.,** `viewportEntry: "#stats"`
 
-- **exeFn:** (Required) - The value of this parameter is a `function()` which will be execute. </br>
+- **exeFn:** (Required) - The value of this parameter is a `function()` which will be execute.  
 **e.g.,** `exeFn: () = {};`
 
-- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional. </br>
+- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional.  
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
 
 ### Example
@@ -184,4 +185,4 @@ lazyload.execute({
 
 ## 📄 License
 
-MIT
+**MIT**
