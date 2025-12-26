@@ -13,7 +13,7 @@ Lazyload defers loading of **images** and **videos**, and delays **execution of 
 
 This is a modern, dependency-free vanilla JavaScript utility built on top of the **Intersection Observer API**. It observes when target elements enter the browser’s viewport and then dynamically loads images, loads videos, or executes functions exactly once.  Modern browser APIs and best practices are followed to ensure efficiency, simplicity, and flexibility.
 
----
+▼
 
 ## Features
 
@@ -22,7 +22,7 @@ This is a modern, dependency-free vanilla JavaScript utility built on top of the
 - Configurable viewport, margins, and thresholds
 - Zero dependencies
 
----
+▼
 
 ## 📦 Installation
 
@@ -39,10 +39,10 @@ import { Lazyload } from "@bitlaab/lazyload";
 
 Or import directly using **CDN**
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.4/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.5/module.js";
 ```
 
----
+▼
 
 ## Global Methods
 
@@ -51,7 +51,7 @@ import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.4/m
 | media()   | Load images and videos when element will enter into the viewport. |
 | execute() | Execute function when element will enter into the viewport. |
 
----
+▼
 
 ## 🖼️ 🎥 media()
 It will load **images** and **videos** when item will enter into the viewport. the method accept 5 parameters of object:
@@ -69,7 +69,7 @@ It will load **images** and **videos** when item will enter into the viewport. t
 **e.g.,** `attr: "data-xyz"`.  
 **result** `<img data-xyz="/image.jpg" />`
 
-- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional.  
+- **options:** (Optional) - The configuration of the lazyload. **Most of the time you don't need to use it, the package internally handle it. Only use, when you want manual control.** the value of it is an `object` with 3 properties and all are optional.  
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
 
 ### YOU CAN LOAD MEDIA IN TWO WAYS:
@@ -113,7 +113,7 @@ lazyload.media({
 });
 ```
 
----
+▼
 
 ## ⚙️ execute()
 It will execute function when `viewportEntry` element will enter into the viewport. the method accept 3 parameters:
@@ -124,25 +124,37 @@ It will execute function when `viewportEntry` element will enter into the viewpo
 - **exeFn:** (Required) - The value of this parameter is a `function()` which will be execute.  
 **e.g.,** `exeFn: () = {};`
 
-- **options:** (Optional) - The configuration of the lazyload. the value of it is an `object` with 3 properties and all are optional.  
+- **options:** (Optional) - The configuration of the lazyload. **Most of the time you don't need to use it, the package internally handle it. Only use, when you want manual control.** the value of it is an `object` with 3 properties and all are optional.  
 **e.g.,** `options: {root: null, loadBefore: 0, loadAfter: 0}`
 
 ### Example
 
 ```html
-<div id="stats"></div>
+<div id="stats">
+    <h1 class="title"></h1>
+</div>
 ```
 
 ```js
+async function fetchPosts() {
+    const url = "https://jsonplaceholder.typicode.com/posts"
+    const resp = await fetch(url);
+    const arr = await resp.json();
+
+    document.querySelector(".title").textContent = arr[0]
+}
+
+// ---------------------------------------------------------------------
+
 const lazyload = new Lazyload();
 
 lazyload.execute({
     viewportEntry: "#stats",
-    exeFn: () => console.log("Visible"),
+    exeFn: fetchPosts,
 });
 ```
 
----
+▼
 
 ## Global Options
 **Most of the time you don't need to use it, the package internally handle those options.**  
@@ -168,11 +180,7 @@ options: {
 lazyload.media({
     wrapper: "...",
     srcTarget: "...",
-    options: {
-        root: "...",
-        loadBefore: 100,
-        loadAfter: 0
-    }
+    options: {root: "...", loadBefore: 100, loadAfter: 0}
 });
 
 // or
@@ -180,15 +188,11 @@ lazyload.media({
 lazyload.execute({
     viewportEntry: "...",
     exeFn: () => {},
-    options: {
-        root: "...",
-        loadBefore: 0,
-        loadAfter: 0.8
-    }
+    options: {root: "...", loadBefore: 0, loadAfter: 0.8}
 });
 ```
 
----
+▼
 
 ## 📄 License
 
