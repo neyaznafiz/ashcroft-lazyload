@@ -1,4 +1,4 @@
-import {validCSSSelector} from "./utils.js"
+import {validCSSSelector, validDOMElement} from "./utils.js"
 
 class Lazyload {
     #observer = null;
@@ -29,10 +29,10 @@ class Lazyload {
     #config({ root = null, loadBefore = 0, loadAfter = 0 } = {}) {
         let isValidDOM = true;
 
-        if (root !== null) isValidDOM = validCSSSelector(root);
+        if (root !== null) isValidDOM = validDOMElement(root);
 
         if (isValidDOM === false) {
-            throw new Error('Failed to construct "LazyLoad": "root" must have to be a valid CSS selector!');
+            throw new Error('Failed to construct "LazyLoad": "root" must have to be a valid DOM Element!');
         }
 
         if (
@@ -47,12 +47,10 @@ class Lazyload {
             throw new Error('Failed to construct "LazyLoad": "loadAfter" must have to be a number between 0 and 1!');
         }
 
-        const rootElem = document.querySelector(root)
-
         // Observer Options
         this.#options = {
             // The element that is used as the viewport for checking visibility
-            root: rootElem,
+            root: root,
             // Trigger `{loadBefore}px` before the element fully enters the viewport
             rootMargin: `${loadBefore}px`,
             // Trigger when {loadAfter}% of the element is visible
@@ -65,11 +63,8 @@ class Lazyload {
     // #########################################################################
     media({wrapper = null, srcTarget = null, attr = null, lazyUrls = [], options = {root: null, loadBefore: 0, loadAfter: 0}} = {}) {
         if (wrapper !== null) {
-            if (
-                typeof wrapper !== "string" ||
-                validCSSSelector(wrapper) === false
-            ) {
-                throw new Error('Failed to construct "LazyLoad": "wrapper" must have to be a valid CSS selector or null!');
+            if (validDOMElement(wrapper) === false) {
+                throw new Error('Failed to construct "LazyLoad": "wrapper" must have to be a valid DOM Element or null!');
             }
         }
 
@@ -103,9 +98,7 @@ class Lazyload {
         let imgElements = null
 
         if (wrapper) {
-            imgElements = document
-                .querySelector(wrapper)
-                .querySelectorAll(srcTarget);
+            imgElements = wrapper.querySelectorAll(srcTarget);
         } else {
             imgElements = document.querySelectorAll(srcTarget);
         }
@@ -155,11 +148,8 @@ class Lazyload {
     // # Execute Function
     // #########################################################################
     execute({viewportEntry = null, exeFn = null, options = {root: null, loadBefore: 0, loadAfter: 0}} = {}) {
-        if (
-            typeof viewportEntry !== "string" ||
-            validCSSSelector(viewportEntry) === false
-        ) {
-            throw new Error('Failed to construct "LazyLoad": "viewportEntry" is required and must be a valid CSS selector!');
+        if (validDOMElement(viewportEntry) === false) {
+            throw new Error('Failed to construct "LazyLoad": "viewportEntry" is required and must be a valid DOM Element!');
         }
 
         if (typeof exeFn !== 'function') {
@@ -178,8 +168,7 @@ class Lazyload {
             this.#handleFunctionExecution(exeFn), this.#options
         );
 
-        const element = document.querySelector(viewportEntry);
-        this.#observer.observe(element);
+        this.#observer.observe(viewportEntry);
     }
 
     // #########################################################################

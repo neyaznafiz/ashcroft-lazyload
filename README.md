@@ -38,8 +38,10 @@ import { Lazyload } from "@bitlaab/lazyload";
 ```
 
 Or import directly using **CDN**
+
+**Note:** Replace the `<version>` with actual version number.
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.6/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@<version>/module.js";
 ```
 
 ▼
@@ -55,9 +57,9 @@ import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@1.0.6/m
 
 ## 🖼️ 🎥 media()
 It will load **images** and **videos** when item will enter into the viewport. the method accept 5 parameters of object:
-- **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `CSS Selector`.  
-**e.g.,** `wrapper: "#item-wrapper"`  
-**Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can handle it on your needs.
+- **wrapper:** (Optional) - The wrapper of the `srcTarget`. The value of it is `DOM Element`.  
+**e.g.,** `wrapper: document.querySelector("#item-wrapper")`  
+**Note:** If you don't provide the `wrapper` it will select all of the elements with the selector of `srcTarget` from `DOM`, otherwise it will select only from the `wrapper`. You can use it on your needs.
 
 - **srcTarget:** (Required) - The selector of the elements where the image `src` will be set. The value of it is `CSS Selector`.  
 **e.g.,** `srcTarget: ".lazy-item"`
@@ -88,7 +90,7 @@ Setting the `media url` into an attribute called `data-lazy-url`
 const lazyload = new Lazyload();
 
 lazyload.media({
-    wrapper: "#item-wrapper",
+    wrapper: document.querySelector("#item-wrapper"),
     srcTarget: ".lazy-item",
 });
 ```
@@ -107,7 +109,7 @@ Passing `lazyUrls: []`(Array of images or videos urls) parameter of the `lazyloa
 const lazyload = new Lazyload();
 
 lazyload.media({
-    wrapper: "#item-wrapper",
+    wrapper: document.querySelector("#item-wrapper"),
     srcTarget: ".lazy-item",
     lazyUrls: ["/image.jpg", "/video.mp4"],
 });
@@ -118,8 +120,8 @@ lazyload.media({
 ## ⚙️ execute()
 It will execute function when `viewportEntry` element will enter into the viewport. the method accept 3 parameters:
 
-- **viewportEntry:** (Required) - The `viewportEntry` is the element where will be the function call, when the element enter into the viewport the function will be called. The value of it is `CSS Selector`.  
-**e.g.,** `viewportEntry: "#stats"`
+- **viewportEntry:** (Required) - The `viewportEntry` is the element where will be the function call, when the element enter into the viewport the function will be called. The value of it is `DOM Element`.  
+**e.g.,** `viewportEntry: document.querySelector("#stats")`
 
 - **exeFn:** (Required) - The value of this parameter is a `function()` which will be execute.  
 **e.g.,** `exeFn: () = {};`
@@ -149,7 +151,7 @@ async function fetchPosts() {
 const lazyload = new Lazyload();
 
 lazyload.execute({
-    viewportEntry: "#stats",
+    viewportEntry: document.querySelector("#stats"),
     exeFn: fetchPosts,
 });
 ```
@@ -170,7 +172,7 @@ options: {
 
 | Option | Type | Description |
 |------|------|------------|
-| root | string \| null | Viewport container selector |
+| root | DOM Element | null | Viewport container |
 | loadBefore | number | Margin before entering viewport |
 | loadAfter | number | Visibility ratio (0–1) |
 
@@ -178,17 +180,17 @@ options: {
 
 ```js
 lazyload.media({
-    wrapper: "...",
+    wrapper: ...,
     srcTarget: "...",
-    options: {root: "...", loadBefore: 100, loadAfter: 0}
+    options: {root: ..., loadBefore: 100, loadAfter: 0}
 });
 
 // or
 
 lazyload.execute({
-    viewportEntry: "...",
-    exeFn: () => {},
-    options: {root: "...", loadBefore: 0, loadAfter: 0.8}
+    viewportEntry: ...,
+    exeFn: ...,
+    options: {root: ..., loadBefore: 0, loadAfter: 0.8}
 });
 ```
 
