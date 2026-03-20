@@ -9,6 +9,8 @@ A lightweight JavaScript utility built on top of the **IntersectionObserver API*
 
 Only when the target element enters the viewport.
 
+*This is a vanilla JavaScript utility. It can be used in **React** / **Next.js** and other frameworks as well, also have **TypeScript** support. Follow the documentation below for more details.*
+
 Lazyload defers loading of **images** and **videos**, and delays **execution of functions** on long web pages until they enter the viewport. Resources outside the visible area are not loaded or executed until the user scrolls to them, **improving performance and reducing unnecessary network usage**. This behavior is the opposite of preloading.
 
 This is a modern, dependency-free vanilla JavaScript utility built on top of the **Intersection Observer API**. It observes when target elements enter the browser’s viewport and then dynamically loads images, loads videos, or executes functions exactly once.  Modern browser APIs and best practices are followed to ensure efficiency, simplicity, and flexibility.
@@ -41,7 +43,40 @@ Or import directly using **CDN**
 
 **Note:** Replace the `<version>` with actual version number.
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@<version>/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@<version>/dist/index.js";
+```
+
+▼
+
+## 🏷️ TypeScript Support
+
+The package provides full TypeScript support. You can import the exported types for your own usage:
+
+```ts
+// From npm / yarn
+import { Lazyload, TypeLazyOptions, TypeLazyMedia, TypeLazyExecute } from "@bitlaab/lazyload";
+```
+
+### Exported Types
+
+- **`TypeLazyOptions`**: The global configuration object for observer margins and thresholds.
+- **`TypeLazyMedia`**: The configuration object for the `media()` method.
+- **`TypeLazyExecute`**: The configuration object for the `execute()` method.
+
+### Example Usage
+
+```ts
+import { Lazyload, TypeLazyMedia } from "@bitlaab/lazyload";
+
+const lazyload = new Lazyload();
+
+const config: TypeLazyMedia = {
+    wrapper: document.querySelector("#item-wrapper"),
+    srcTarget: ".lazy-item",
+    lazyUrls: ["/image.jpg", "/video.mp4"]
+};
+
+lazyload.media(config);
 ```
 
 ▼
@@ -154,6 +189,74 @@ lazyload.execute({
     viewportEntry: document.querySelector("#stats"),
     exeFn: fetchPosts,
 });
+```
+
+▼
+
+## ⚛️ Usage with React, Next.js, and Vue
+
+Because `@bitlaab/lazyload` is a pure vanilla JavaScript utility, it perfectly integrates with modern frameworks like **React**, **Next.js**, and **Vue**.
+
+- **Next.js (SSR)**: The package is entirely safe to import in Server-Side Rendered applications. DOM APIs (`document`, `IntersectionObserver`) are intentionally never accessed during initialization—only when the `.media()` or `.execute()` methods are explicitly invoked on the client side.
+
+- **React**: To use the package within React components, make sure to instantiate and invoke it inside a `client-side` `useEffect` hook so that it runs after your initial DOM mounts.
+
+- **Vue**: In Vue components, you can safely initialize the script inside the `onMounted` lifecycle hook.
+
+### React / Next.js Example
+
+```tsx
+import { useEffect } from 'react';
+import { Lazyload, TypeLazyMedia } from '@bitlaab/lazyload';
+
+export default function MyComponent() {
+  useEffect(() => {
+    // Guaranteed to run safely exclusively on the client-side
+    const lazyload = new Lazyload();
+
+    const config: TypeLazyMedia = {
+      srcTarget: ".lazy-item",
+      lazyUrls: ["/image.jpg"]
+    };
+
+    lazyload.media(config);
+  }, []);
+
+  return (
+    <div>
+      <img className="lazy-item" alt="Lazy Loaded" />
+    </div>
+  );
+}
+```
+
+---
+
+### Vue 3 (Composition API) Example
+
+```vue
+<script setup lang="ts">
+import { onMounted } from 'vue';
+import { Lazyload, TypeLazyMedia } from '@bitlaab/lazyload';
+
+onMounted(() => {
+  // Guaranteed to run safely entirely on the client-side
+  const lazyload = new Lazyload();
+
+  const config: TypeLazyMedia = {
+    srcTarget: ".lazy-item",
+    lazyUrls: ["/image.jpg"]
+  };
+
+  lazyload.media(config);
+});
+</script>
+
+<template>
+  <div>
+    <img class="lazy-item" alt="Lazy Loaded" />
+  </div>
+</template>
 ```
 
 ▼
