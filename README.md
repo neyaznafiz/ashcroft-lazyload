@@ -41,7 +41,40 @@ Or import directly using **CDN**
 
 **Note:** Replace the `<version>` with actual version number.
 ```js
-import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@<version>/module.js";
+import { Lazyload } from "https://cdn.jsdelivr.net/npm/@bitlaab/lazyload@<version>/dist/index.js";
+```
+
+▼
+
+## 🏷️ TypeScript Support
+
+The package provides full TypeScript support. You can import the exported types for your own usage:
+
+```ts
+// From npm / yarn
+import { Lazyload, TypeLazyOptions, TypeLazyMedia, TypeLazyExecute } from "@bitlaab/lazyload";
+```
+
+### Exported Types
+
+- **`TypeLazyOptions`**: The global configuration object for observer margins and thresholds.
+- **`TypeLazyMedia`**: The configuration object for the `media()` method.
+- **`TypeLazyExecute`**: The configuration object for the `execute()` method.
+
+### Example Usage
+
+```ts
+import { Lazyload, TypeLazyMedia } from "@bitlaab/lazyload";
+
+const lazyload = new Lazyload();
+
+const config: TypeLazyMedia = {
+    wrapper: document.querySelector("#item-wrapper"),
+    srcTarget: ".lazy-item",
+    lazyUrls: ["/image.jpg", "/video.mp4"]
+};
+
+lazyload.media(config);
 ```
 
 ▼
