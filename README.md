@@ -230,8 +230,6 @@ export default function MyComponent() {
 }
 ```
 
----
-
 ### Vue 3 (Composition API) Example
 
 ```vue
