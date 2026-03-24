@@ -1,9 +1,6 @@
 {
   "name": "@bitlaab/lazyload",
-  "version": "2.0.0",
-  "publishConfig": {
-    "access": "public"
-  },
+  "version": "2.0.1",
   "description": "A lightweight JavaScript utility for lazyload images, videos, function call, and etc.",
   "keywords": [
     "lazyload",
