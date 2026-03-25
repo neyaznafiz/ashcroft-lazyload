@@ -15,17 +15,14 @@ Lazyload defers loading of **images** and **videos**, and delays **execution of 
 
 This is a modern, dependency-free vanilla JavaScript utility built on top of the **Intersection Observer API**. It observes when target elements enter the browser’s viewport and then dynamically loads images, loads videos, or executes functions exactly once.  Modern browser APIs and best practices are followed to ensure efficiency, simplicity, and flexibility.
 
-▼
-
 ## Features
 
-- Lazy load images and videos
+- Lazy load images and videos, iframes, custom components, etc.
 - Execute functions on viewport entry
 - Configurable viewport, margins, and thresholds
 - Zero dependencies
 
-▼
-
 ## Documentation
 
-### Check out the [Documentation ➢](https://bitlaablazyload.web.app)
+### ➢ Check out the [Documentation](https://bitlaablazyload.web.app)
+
