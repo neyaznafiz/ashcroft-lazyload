@@ -1,6 +1,6 @@
 {
   "name": "@bitlaab/lazyload",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A lightweight JavaScript utility for lazyload images, videos, function call, and etc.",
   "keywords": [
     "lazyload",
@@ -11,7 +11,7 @@
     "optimize",
     "neyaznafiz"
   ],
-  "homepage": "https://github.com/neyaznafiz/bitlaab-lazyload#readme",
+  "homepage": "https://bitlaablazyload.web.app",
   "bugs": {
     "url": "https://github.com/neyaznafiz/bitlaab-lazyload/issues"
   },
